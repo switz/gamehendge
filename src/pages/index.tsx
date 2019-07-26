@@ -38,7 +38,9 @@ function readFileAsyncURL(file) {
   })
 }
 
-const onChange = setLatLong => async (e: React.SyntheticEvent<HTMLInputElement>) => {
+const onChange = (setLatLong, setInitial, setWorking) => async (e: React.SyntheticEvent<HTMLInputElement>) => {
+  setWorking(true);
+  console.log('starting');
   const files = e.target.files;
 
   // We only need the start of the file for the Exif info.
@@ -65,16 +67,26 @@ const onChange = setLatLong => async (e: React.SyntheticEvent<HTMLInputElement>)
   }));
 
   setLatLong(output);
+  setInitial(false);
+  setWorking(false);
 }
-let icon = null;
+
+let icon = null, bdn = null;
 
 if (typeof window !== 'undefined') {
   icon = L.divIcon({
     className: 'custom-marker',
   });
+
+  bdn = L.icon({
+    iconUrl: 'https://i.imgur.com/okry3he.png',
+    iconSize:     [1600/4, 900/4], // size of the icon
+  });
 }
 
 const IndexPage = () => {
+  const [isWorking, setWorking] = React.useState(false);
+  const [isInitial, setInitial] = React.useState(true);
   const [latLong, setLatLong] = React.useState([[44.9738, -93.2578]]);
 
   if (typeof window === 'undefined') return null;
@@ -84,16 +96,21 @@ const IndexPage = () => {
       <Page>
         <Container>
           <div>
-            <input type="file" onChange={onChange(setLatLong)} multiple />
+            <input type="file" onChange={onChange(setLatLong, setInitial, setWorking)} multiple />
+            <div>Work is in progress: {isWorking ? 'yes' : 'no'}</div>
           </div>
 
           <div style={{ height: 600 }}>
-            <Map center={latLong[0]} zoom={19} style={{ height: 600 }}>
+            <Map center={latLong[0]} zoom={isInitial ? 17 : 19} style={{ height: 600 }}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               />
-              {icon && latLong.map((ll, idx) =>
+              {isInitial ? <Marker
+                position={latLong[0]}
+                icon={bdn}
+              /> : null}
+              {!isInitial && icon && latLong.map((ll, idx) =>
                 <Marker position={ll} key={idx} icon={icon}>
                   <Popup>Here's your shitty image. <br /> <img src={ll[2]} /></Popup>
                 </Marker>
