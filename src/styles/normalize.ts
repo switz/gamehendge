@@ -157,4 +157,12 @@ export default `
       padding-left: 1.25rem;
     }
   }
+
+  .custom-marker {
+    height: 12px;
+    width: 12px;
+    background: red;
+    border-radius: 100%;
+    opacity: 0.5;
+  }
 `

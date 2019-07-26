@@ -1,7 +1,7 @@
 import * as React from 'react'
-import * as ReactDOMServer from 'react-dom/server'
-import L from 'leaflet'
 import ExifReader from 'exifreader'
+import Loadable from '@loadable/component'
+import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import styled from '@emotion/styled'
 
@@ -38,10 +38,6 @@ function readFileAsyncURL(file) {
   })
 }
 
-const readerHandler = (setLatLong, file) => readerEvent => {
-
-};
-
 const onChange = setLatLong => (e: React.SyntheticEvent<HTMLInputElement>) => {
   const files = e.target.files;
 
@@ -49,8 +45,7 @@ const onChange = setLatLong => (e: React.SyntheticEvent<HTMLInputElement>) => {
   setLatLong([]);
   // We only need the start of the file for the Exif info.
   Array.from(files).map(async (file) => {
-    const contentBuffer = await readFileAsync(file);
-    const url = await readFileAsyncURL(file);
+    const [contentBuffer, url] = await Promise.all([readFileAsync(file), readFileAsyncURL(file)]);
 
     try {
       const tags = ExifReader.load(contentBuffer);
@@ -71,22 +66,18 @@ const onChange = setLatLong => (e: React.SyntheticEvent<HTMLInputElement>) => {
     }
   });
 }
+let icon = null;
 
-const Icon = styled.div`
-  height: 12px;
-  width: 12px;
-  background: red;
-  border-radius: 100%;
-  opacity: 0.5;
-`;
-
-const icon = L.divIcon({
-  className: 'custom-icon',
-  html: ReactDOMServer.renderToString(<Icon />)
-});
+if (typeof window !== 'undefined') {
+  icon = L.divIcon({
+    className: 'custom-marker',
+  });
+}
 
 const IndexPage = () => {
   const [latLong, setLatLong] = React.useState([[51.505, -0.09]]);
+
+  if (typeof window === 'undefined') return null;
 
   return (
     <IndexLayout>
@@ -104,7 +95,7 @@ const IndexPage = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               />
-              {latLong.map((ll, idx) =>
+              {icon && latLong.map((ll, idx) =>
                 <Marker position={ll} key={idx} icon={icon}>
                   <Popup>Here's your shitty image. <br /> <img src={ll[2]} /></Popup>
                 </Marker>
