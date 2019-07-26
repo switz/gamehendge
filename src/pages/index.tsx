@@ -41,7 +41,6 @@ function readFileAsyncURL(file) {
 const onChange = setLatLong => (e: React.SyntheticEvent<HTMLInputElement>) => {
   const files = e.target.files;
 
-  console.log(files)
   setLatLong([]);
   // We only need the start of the file for the Exif info.
   Array.from(files).map(async (file) => {
@@ -56,8 +55,8 @@ const onChange = setLatLong => (e: React.SyntheticEvent<HTMLInputElement>) => {
       delete tags['MakerNote'];
 
       const { GPSLatitude, GPSLongitude } = tags;
-      console.log({ GPSLatitude, GPSLongitude });
-      console.log(tags)
+      // console.log({ GPSLatitude, GPSLongitude });
+      // console.log(tags)
 
       setLatLong(existing => existing.concat([[Number(GPSLatitude.description), -Number(GPSLongitude.description), url]]))
 
@@ -75,7 +74,7 @@ if (typeof window !== 'undefined') {
 }
 
 const IndexPage = () => {
-  const [latLong, setLatLong] = React.useState([[51.505, -0.09]]);
+  const [latLong, setLatLong] = React.useState([[44.9738, -93.2578]]);
 
   if (typeof window === 'undefined') return null;
 
@@ -84,8 +83,6 @@ const IndexPage = () => {
       <Page>
         <Container>
           <div>
-            <h1>Gamehendge</h1>
-
             <input type="file" onChange={onChange(setLatLong)} multiple />
           </div>
 

@@ -12,6 +12,7 @@ module.exports = {
       email: 'resir014@gmail.com'
     }
   },
+  pathPrefix: process.env.NODE_ENV === 'production' ? '/gamehendge' : '/',
   plugins: [
     {
       resolve: 'gatsby-source-filesystem',
