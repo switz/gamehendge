@@ -38,12 +38,11 @@ function readFileAsyncURL(file) {
   })
 }
 
-const onChange = setLatLong => (e: React.SyntheticEvent<HTMLInputElement>) => {
+const onChange = setLatLong => async (e: React.SyntheticEvent<HTMLInputElement>) => {
   const files = e.target.files;
 
-  setLatLong([]);
   // We only need the start of the file for the Exif info.
-  Array.from(files).map(async (file) => {
+  const output = await Promise.all(Array.from(files).map(async (file) => {
     const [contentBuffer, url] = await Promise.all([readFileAsync(file), readFileAsyncURL(file)]);
 
     try {
@@ -58,12 +57,14 @@ const onChange = setLatLong => (e: React.SyntheticEvent<HTMLInputElement>) => {
       // console.log({ GPSLatitude, GPSLongitude });
       // console.log(tags)
 
-      setLatLong(existing => existing.concat([[Number(GPSLatitude.description), -Number(GPSLongitude.description), url]]))
+      return [Number(GPSLatitude.description), -Number(GPSLongitude.description), url];
 
     } catch (error) {
       alert(error);
     }
-  });
+  }));
+
+  setLatLong(output);
 }
 let icon = null;
 
