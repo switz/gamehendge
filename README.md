@@ -2,7 +2,7 @@
 
 ## What is this
 
-A friend of mine shoots a lot of drone photography. He wanted a simple tool that he can use in the field to quickly map image exif GPS data to a map so he can be sure no photos corrupted.
+A friend of mine shoots a lot of drone photography. He wanted a simple tool that he can use in the field to quickly map image exif GPS data to a map so he can be sure no photos corrupted before heading home.
 
 Visit https://saewitz.com/gamehendge to use this application.
 
