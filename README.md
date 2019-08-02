@@ -1,10 +1,6 @@
 # Gamehendge
 
-> A starter kit for TypeScript-based Gatsby projects with sensible defaults.
-
-This is a starter kit for [Gatsby.js](https://www.gatsbyjs.org/) websites written in TypeScript. It includes the bare essentials for you to get started (styling, Markdown parsing, minimal toolset).
-
-## What is it
+## What is this
 
 A friend of mine shoots a lot of drone photography. He wanted a simple tool that he can use in the field to quickly map image exif GPS data to a map so he can be sure no photos corrupted.
 
