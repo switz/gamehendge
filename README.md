@@ -1,24 +1,26 @@
-# gatsby-starter-typescript-plus
+# Gamehendge
 
 > A starter kit for TypeScript-based Gatsby projects with sensible defaults.
 
 This is a starter kit for [Gatsby.js](https://www.gatsbyjs.org/) websites written in TypeScript. It includes the bare essentials for you to get started (styling, Markdown parsing, minimal toolset).
 
-## Features
+## What is it
 
-- TypeScript
-- ESLint (with custom ESLint rules)
-- Markdown rendering with Remark
-- Basic component structure
-- Styling with [emotion](https://emotion.sh/)
+A friend of mine shoots a lot of drone photography. He wanted a simple tool that he can use in the field to quickly map image exif GPS data to a map so he can be sure no photos corrupted.
 
-## Geting started
+Visit https://saewitz.com/gamehendge to use this application.
 
-Install this starter (assuming you have `gatsby-cli` installed) by running the following command:
+Click "Choose Files" and select multiple images w/ exif data. It'll place red dots onto the map. Refresh the page if you want to start fresh.
 
-```bash
-gatsby new project-name https://github.com/resir014/gatsby-starter-typescript-plus
-```
+#### Screenshot
+
+![website](https://i.imgur.com/w3SBPis.png)
+
+That's it. That's all it does. Nothing more.
+
+## Contributing
+
+You want a new feature? Feel free to send a PR. You don't know how to code? Open an issue, and maybe I'll implement it. Maybe not. Enjoy.
 
 ## Developing
 
@@ -28,23 +30,13 @@ A nodejs >= 6.0.0 setup with [yarn](https://yarnpkg.com/) is recommended.
 # install dependencies
 yarn
 
-# ...or, for npm
-npm install
-
 # serve with hot reload at localhost:8000
 npm start
 
 # build for production
 npm run build
-
-# build for production and push to gh-pages branch
-npm run deploy
 ```
 
 ## Credits
 
 Built with [Gatsby](https://www.gatsbyjs.org/) - the blazing-fast static site generator for [React](https://facebook.github.io/react/).
-
-## Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/resir014/gatsby-starter-typescript-plus)
