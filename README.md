@@ -4,9 +4,9 @@
 
 A friend of mine shoots a lot of drone photography. He wanted a simple tool that he can use in the field to quickly map image exif GPS data to a map so he can be sure no photos corrupted before heading home.
 
-Visit https://saewitz.com/gamehendge to use this application.
-
 Click "Choose Files" and select multiple images w/ exif data. It'll place red dots onto the map. Refresh the page if you want to start fresh.
+
+Visit https://saewitz.com/gamehendge to give it a swirl.
 
 #### Screenshot
 
