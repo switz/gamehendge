@@ -59,7 +59,7 @@ const onChange = (setLatLong, setInitial, setWorking) => async (e: React.Synthet
       // console.log({ GPSLatitude, GPSLongitude });
       // console.log(tags)
 
-      return [Number(GPSLatitude.description), -Number(GPSLongitude.description), url];
+      return [Number(GPSLatitude.description), -Number(GPSLongitude.description), url, file.name];
 
     } catch (error) {
       alert(error);
@@ -112,7 +112,7 @@ const IndexPage = () => {
               /> : null}
               {!isInitial && icon && latLong.map((ll, idx) =>
                 <Marker position={ll} key={idx} icon={icon}>
-                  <Popup>Here's your shitty image. <br /> <img src={ll[2]} /></Popup>
+                  <Popup><div>Here's your shitty image.</div><h4>{ll[3] || 'No File Name?'}</h4> <img src={ll[2]} /></Popup>
                 </Marker>
               )}
             </Map>
