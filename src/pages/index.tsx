@@ -76,11 +76,6 @@ if (typeof window !== 'undefined') {
   icon = L.divIcon({
     className: 'custom-marker',
   });
-
-  bdn = L.icon({
-    iconUrl: 'https://i.imgur.com/okry3he.png',
-    iconSize:     [1600/4, 900/4], // size of the icon
-  });
 }
 
 const IndexPage = () => {
@@ -105,13 +100,9 @@ const IndexPage = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               />
-              {isInitial ? <Marker
-                position={latLong[0]}
-                icon={bdn}
-              /> : null}
               {!isInitial && icon && latLong.map((ll, idx) =>
                 <Marker position={ll} key={idx} icon={icon}>
-                  <Popup><div>Here's your shitty image.</div><h4>{ll[3] || 'No File Name?'}</h4> <img src={ll[2]} /></Popup>
+                  <Popup><div>Here's your image.</div><h4>{ll[3] || 'No File Name?'}</h4> <img src={ll[2]} /></Popup>
                 </Marker>
               )}
             </Map>
