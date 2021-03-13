@@ -9,16 +9,6 @@ import Page from '../components/Page'
 import Container from '../components/Container'
 import IndexLayout from '../layouts'
 
-if (typeof window !== 'undefined') {
-
-  const audio = new Audio('https://archive.org/download/Twiddle2014-08-23.ca14.flac16/Twiddle2014-08-22.ca14.set1.t06.mp3');
-  const handlePlayClick = () => {
-    audio.play();
-  }
-
-  document.addEventListener("click", handlePlayClick, false);
-}
-
 function readFileAsync(file) {
   return new Promise((resolve, reject) => {
     let reader = new FileReader();
