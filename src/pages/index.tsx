@@ -65,7 +65,7 @@ const onChange = (setLatLong, setInitial, setWorking) => async (e: React.Synthet
     }
   }));
 
-  setLatLong(output);
+  setLatLong(output.filter(x => x));
   setInitial(false);
   setWorking(false);
 }
@@ -95,13 +95,13 @@ const IndexPage = () => {
           </div>
 
           <div style={{ height: 600 }}>
-            <Map center={latLong[0]} zoom={isInitial ? 17 : 19} style={{ height: 600 }}>
+            <Map center={latLong[0].slice(0, 2)} zoom={isInitial ? 17 : 19} style={{ height: 600 }}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               />
-              {!isInitial && icon && latLong.filter(x => x).map((ll, idx) =>
-                <Marker position={ll} key={idx} icon={icon}>
+              {!isInitial && icon && latLong.map((ll, idx) =>
+                <Marker position={ll.slice(0, 2)} key={idx} icon={icon}>
                   <Popup><div>Here's your image.</div><h4>{ll[3] || 'No File Name?'}</h4> <img src={ll[2]} /></Popup>
                 </Marker>
               )}
