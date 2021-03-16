@@ -100,7 +100,7 @@ const IndexPage = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               />
-              {!isInitial && icon && latLong.map((ll, idx) =>
+              {!isInitial && icon && latLong.filter(x => x).map((ll, idx) =>
                 <Marker position={ll} key={idx} icon={icon}>
                   <Popup><div>Here's your image.</div><h4>{ll[3] || 'No File Name?'}</h4> <img src={ll[2]} /></Popup>
                 </Marker>
